@@ -1,0 +1,34 @@
+let myString = "Hello, World!";
+let myRegex = /Hello/;
+
+//Test if exists
+let result = myRegex.test(myString); // Returns true
+
+//Extract Matches
+let result  = myString.match(myRegex); //returns ["Hello"]
+
+//OR operator
+let myRegex = /dog|cat|bird|fish/;
+
+//Flags
+//Ignore Case - i
+//Extract Repeated - g
+let myRegex = /Hello/i;
+
+//Wildcard - . (dot/period)
+let unRegex = /.un/;
+
+//Character classes - []
+let bgRegex = /b[aiu]g/; //Returns "bag" "big" "bug"
+
+//Character and number sets
+let bgRegex = /[a-e0-5]/;
+
+//Negated character set
+let bgRegex = /[^a-e0-5]/;
+
+//Occurs One or More Times
+/a+/
+
+//Occurs Zero or More Times
+/a*/

@@ -1,0 +1,24 @@
+Functions:
+
+const square = function(x){
+    return x*x;
+};
+//Declaration Notation
+function square(x){
+    return x*x;
+};
+//Arrow Functions
+const power = (x)=>{
+    return x*x;
+}
+
+
+//Difference between let and var
+//var allows multiple variable declarations
+//let does not allow for multiple variable declarations
+var camper = 'James';
+var camper = 'David';
+console.log(camper);
+// logs 'David'
+
+//const keyword is still mutable if  variable is an array or an object

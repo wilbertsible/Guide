@@ -1,0 +1,114 @@
+Mongodb Notes
+
+Connect to a Mongo database using shell
+	mongo "mongodb+srv://sandbox-xxxxx.mongodb.net/test"  --username m001-student --password m001-mongodb-basics
+
+Load database
+    //Go to directory of js file to be loaded
+    load("loadMovieDetailsDataset.js")
+
+List the databases
+    show dbs
+
+List all the collections in the database
+    show collections
+
+Find a document
+    //embedded queries: dot notation
+    db.movies.find({wind.type:"C"}).pretty()
+    
+    //query exact array
+    db.movies.find({cast:["Jeff Bridges", "Tim Robbins"]}).pretty()
+    //query specific element of an array
+    db.movies.find({cast:"Jeff Bridges"}).pretty()
+    //query element in a specific position in array
+    db.movies.find({"cast.0":"Jeff Bridges"}).pretty()
+
+Cursor
+    //iterate through search results
+    it
+
+Projection
+    //include:1
+    //exclude:0
+    /*id is projected by default*/
+    db.movies.find({genre:"Action, Adventure"}, {title:1})
+
+Create a document
+    db.moviesScratch.insertOne({title:"Star Trek II: The Wrath of Khan", year: 1982, imdb: "tt0084726"})
+
+Create multiple documents
+    //Default is ordered inserts
+    //Ordered means that as soon as the command encounters an error, it will stop inserting documents
+    db.moviesScratch.insertMany(
+    [
+        {
+	    "_id" : "tt0084726",
+	    "title" : "Star Trek II: The Wrath of Khan",
+	    "year" : 1982,
+	    "type" : "movie"
+        },
+        {
+	    "_id" : "tt0796366",
+	    "title" : "Star Trek",
+	    "year" : 2009,
+	    "type" : "movie"
+        }
+    ],
+    {
+        "ordered": false 
+    }
+);
+
+Update One document
+    //Update operators: https://docs.mongodb.com/manual/reference/operator/update
+    db.movieDetails.updateOne({
+        title:"The Martian"
+        },{
+            $set:{
+                poster:"http://www.yahoo.com"
+            }
+})
+    //upsert: update if exists, insert if does not exist
+
+Update Many
+    db.movieDetails.updateMany({
+        rated: null
+    }, {
+        $unset:{
+            rated:""
+        }
+})
+
+Replace one document
+    //updateOne() changes only one query parameter of the document
+    //replaceOne() replaces the whole document
+    let filter ={title:"House M.D., Season Four: New Beginnings"}
+    let doc = db.movieDetails.findOne(filter);
+    doc.poster;
+    doc.poster = "https://www.yahoo.com";
+    db.movieDetails.replaceOne(filter, doc);
+
+Delete One 
+    db.reviews.deleteOne({_id: ObjectId("asf6516846s5ad1f3")})
+
+Delete Many
+    db.reviews.deleteMany({reviewer_id: 759723314})
+
+
+Query operators
+    //https://docs.mongodb.com/manual/reference/operator/query/
+    //Comparison Operator
+    db.movieDetails.find({runtime:{$gt:90}})
+    //Element Operator
+    db.movies.find({mpaaRating:{$exitsts:true}})    //null counts in {$exists:false} query
+    //Logical Operator
+    db.movieDetails.find({$and:[{metacritic: {$gt:85}},{tomato.meter: {$gt:95}}]})
+    //Array Operator($all)
+    db.movieDetails.find({genres:{$all:["Comedy", "Drama"]}})
+    //Array Operator($size)
+    db.movieDetails.find({countries:{$size:1}})
+    //Array Operator($elemMatch) //All of the criteria should match in the same object inside the array
+    db.movieDetails.find({boxOffice:{$elemMatch:{country:"Germany",revenue:{$gt16}}}})
+    //REGEX
+    db.movieDetails({awards.text:{$regex: /^Won.*/}})
