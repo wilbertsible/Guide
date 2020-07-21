@@ -1,5 +1,4 @@
 Functions:
-
 const square = function(x){
     return x*x;
 };
@@ -13,6 +12,7 @@ const power = (x)=>{
 }
 
 
+/***ES6***/
 //Difference between let and var
 //var allows multiple variable declarations
 //let does not allow for multiple variable declarations
@@ -22,3 +22,26 @@ console.log(camper);
 // logs 'David'
 
 //const keyword is still mutable if  variable is an array or an object
+
+//Prevent Object Mutation
+Object.freeze(obj);
+
+//Rest Parameter
+function howMany(...args){
+    return args.length;
+}
+
+//Spread Parameter
+const arr = [6, 89, 3, 45];
+const maximus = Math.max(...arr); //retuns 89
+
+//Destructuring
+const HIGH_TEMPERATURES = {
+    yesterday: 75,
+    today: 77,
+    tomorrow: 80
+  };
+    //Objects
+    const {name:userName, age:userAge}
+    //array
+    [a, b] = [1,2] 

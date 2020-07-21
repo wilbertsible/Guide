@@ -5,6 +5,7 @@ let myRegex = /Hello/;
 let result = myRegex.test(myString); // Returns true
 
 //Extract Matches
+//Regex is greedy matching - matches the longest possible part
 let result  = myString.match(myRegex); //returns ["Hello"]
 
 //OR operator
@@ -32,3 +33,25 @@ let bgRegex = /[^a-e0-5]/;
 
 //Occurs Zero or More Times
 /a*/
+
+//Lazy Matching
+/th?/
+
+//Match beginning string patterns
+/^Hello/ 
+
+//Match end string patterns
+/Hello$/
+
+//Match All 
+/\w/    //All letters, numbers and underscores
+/\W/    //All except letters, numbers and underscores
+/\d/    //All numbers
+/\D/    //All except numbers
+/\g/    //All whitespaces
+/\G/    //All non-whitespaces
+
+
+//Specify number of Matches
+/a{3,5}h/   //Upper and Lower   //Retuns true for "aaah", "aaaah", "aaaaah"
+/a{3}h/     //Exact             //Returns true for "aaah"
