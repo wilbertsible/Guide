@@ -1,0 +1,76 @@
+//Rendering elements to the DOM
+ReactDOM.render(componentToRender, targetNode);
+ReactDOM.render(JSX, document.getElementById('challenge-node'));
+
+
+//Stateless Functional Components
+const MyComponent = function() {
+    return(
+        <div>Hello World!</div>
+    )
+}
+
+// ES6 React Component
+class Kitten extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <h1>Hi</h1>
+    );
+  }
+}
+
+//Composing Components
+const ChildComponent = () => {
+  return (
+    <div>
+      <p>I am the child</p>
+    </div>
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>I am the parent</h1>
+        { /* change code below this line */ }
+
+          <ChildComponent />
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+
+//Passing Props to Functional Components
+const CurrentDate = (props) => {
+  return (
+    <div>
+      { /* change code below this line */ }
+      <p>The current date is: {props.date}</p>
+      { /* change code above this line */ }
+    </div>
+  );
+};
+
+class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>What date is it?</h3>
+        { /* change code below this line */ }
+        <CurrentDate date={Date()} />
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
