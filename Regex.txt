@@ -48,10 +48,18 @@ let bgRegex = /[^a-e0-5]/;
 /\W/    //All except letters, numbers and underscores
 /\d/    //All numbers
 /\D/    //All except numbers
-/\g/    //All whitespaces
-/\G/    //All non-whitespaces
+/\s/    //All whitespaces
+/\S/    //All non-whitespaces
 
 
 //Specify number of Matches
 /a{3,5}h/   //Upper and Lower   //Retuns true for "aaah", "aaaah", "aaaaah"
 /a{3}h/     //Exact             //Returns true for "aaah"
+
+//Lookaheads
+let quRegex= /q(?=u)/;  //Positive lookahead
+let qRegex = /q(?!u)/;  //Negative lookahead
+
+
+//Capture Groups
+let repeatRegex = /(\w+)\s\1/;  //repeats the (\w+) in the position of "\1"
